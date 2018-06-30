@@ -16,10 +16,10 @@ module Players
 
     def move(board)
       @board = board
-      case 
-      when winning_move != nil 
+      case
+      when winning_move != nil
         input = winning_move + 1
-      when blocking_move != nil 
+      when blocking_move != nil
         input = blocking_move + 1
       when center_empty?
         input = 5
