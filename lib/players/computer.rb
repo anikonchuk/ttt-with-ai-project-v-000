@@ -16,7 +16,21 @@ module Players
 
     def move(board)
       @board = board
-
+      case 
+      when winning_move != nil 
+        input = winning_move + 1
+      when blocking_move != nil 
+        input = blocking_move + 1
+      when center_empty?
+        input = 5
+      when opposite_corner != nil
+        input = opposite_corner
+      when corners != nil
+        input = corners + 1
+      else
+        input = rand(1..9)
+      end
+      input.to_s
     end
 
     #1- Find a winning move
