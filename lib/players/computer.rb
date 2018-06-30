@@ -20,7 +20,7 @@ module Players
     end
 
     #1- Find a winning move
-    def winning_move 
+    def winning_move
       win_combo = WIN_COMBINATIONS.find do |combo|
         (@board.cells[combo[0]] == @token && @board.cells[combo[1]] == @token && @board.cells[combo[2]] == " ") || (@board.cells[combo[0]] == @token && @board.cells[combo[2]] == @token && @board.cells[combo[1]] == " ") || (@board.cells[combo[1]] == @token && @board.cells[combo[2]] == @token && @board.cells[combo[0]] == " ")
       end
@@ -30,9 +30,9 @@ module Players
         end
       end
     end
-    
 
-    #2- Find a blocking move-- need a way to identify other token first 
+
+    #2- Find a blocking move-- need a way to identify other token first
     def other_token
       if @token == "X"
         "O"
@@ -50,19 +50,34 @@ module Players
           @board.cells[spot] == " "
         end
       end
-    end      
-    
+    end
+
     #3- Take the center if it's empty
     def center_empty?
       @board.cells[4] == " "
     end
 
     #4- Find the opposite corner
-
+    def opposite_corner
+      if @board.taken?(1) && !@board.taken(9)
+        9
+      elsif @board.taken?(9) && !@board.taken(1)
+        1
+      elsif @board.taken?(3) && !@board.taken(7)
+        7
+      elsif @board.taken?(7) && !@board.taken(3)
+        3
+      else
+        nil
+      end
+    end
 
     #5- Find any open corner
-
+    def corners
+      [0, 2, 6, 8].find do |corner|
+        @board.cells[corner] == " "
+      end
+    end
 
   end
-
 end
